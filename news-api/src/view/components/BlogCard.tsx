@@ -13,7 +13,7 @@ const BlogCard = ({ blogItem }: any) => {
     return (
         <>
             <div className="card w-96 bg-base-100 shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer hover:opacity-90">
-                <Link to={`/blog/${source.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+                <Link to={`/blog/${source.id}${publishedAt}`} style={{ textDecoration: 'none', color: 'black' }}>
 
                     <figure><img src={urlToImage} alt={source.name} /></figure>
                     <div className="card-body">
