@@ -1,17 +1,29 @@
-import React from 'react'
+import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-const BlogCard: React.FC = () => {
+const BlogCard = ({ blogItem }: any) => {
+    const { publishedAt, description, urlToImage, source, title } = blogItem;
+
+    const published = (moment(publishedAt)).format('LLL');
+
+    const formatDescription = (description: string): string => {
+        return description.substring(0, 130) + '....';
+    }
+
     return (
         <>
             <div className="card w-96 bg-base-100 shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer hover:opacity-90">
-                <figure><img src="https://images.wsj.net/im-731228/social" alt="Shoes" /></figure>
-                <div className="card-body">
-                    <h1 className="card-title">
-                        The Wall Street Journal
-                    </h1>
-                    <p className='text-sm'>Thomas H. Lee, Leveraged-Buyout Pioneer, Dies of Apparent Suicide</p>
-                    <p className='text-[0.65rem] text-gray-400'>Published at Rabu, 1 Maret 2023</p>
-                </div>
+                <Link to={`/blog/${source.id}`} style={{ textDecoration: 'none', color: 'black' }}>
+
+                    <figure><img src={urlToImage} alt={source.name} /></figure>
+                    <div className="card-body">
+                        <h1 className="card-title text-xl font-bold">
+                            {title}
+                        </h1>
+                        <p className='text-xs'>{formatDescription(description)}</p>
+                        <p className='text-[0.65rem] text-gray-400'>Published at {published}</p>
+                    </div>
+                </Link>
             </div>
         </>
     )
